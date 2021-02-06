@@ -1,0 +1,22 @@
+.container {
+  display: grid;
+  grid-template-rows: 50px minmax(95vh, auto) 50px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.container-footer {
+  background: #7fc99d;
+  color: white;
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+@media (min-width: 1024px) {
+  .container-main {
+    width: 768px;
+    margin: 0 auto;
+  }
+}

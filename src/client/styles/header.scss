@@ -1,0 +1,15 @@
+.body-header {
+  height: 50px;
+  border-bottom: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px;
+  background: #62d2a2;
+}
+
+.body-header-link {
+  text-decoration: none;
+  color: white;
+  font-size: 32px;
+}
