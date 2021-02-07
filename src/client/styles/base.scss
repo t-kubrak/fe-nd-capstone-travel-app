@@ -14,9 +14,43 @@
   font-weight: bold;
 }
 
+.error {
+  color: red;
+}
+
+%card {
+  box-shadow: 0 0 5px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.add-trip {
+  @extend %card;
+
+  .form__input {
+    margin-bottom: 15px;
+  }
+}
+
+#trips {
+  .city {font-size: 30px}
+  .date {font-style: italic}
+  .weatherDesc {font-size: 24px}
+  .temperature {font-size: 40px}
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .card {
+    @extend %card;
+  }
+}
+
 @media (min-width: 1024px) {
   .container-main {
-    width: 768px;
+    width: 480px;
     margin: 0 auto;
   }
 }

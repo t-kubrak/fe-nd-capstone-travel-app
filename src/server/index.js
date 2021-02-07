@@ -47,7 +47,7 @@ app.post('/trip', async function (req, res) {
         const weatherDesc = jsonRes.data[0].weather.description;
         const temperature = jsonRes.data[0].temp;
 
-        const pixabayEndpoint = `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${city}&category=places`
+        const pixabayEndpoint = `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${city}`
         const pixabayRes = await fetch(encodeURI(pixabayEndpoint), {
             method: 'GET',
         });
