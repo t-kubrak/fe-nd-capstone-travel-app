@@ -18,7 +18,7 @@ The following topics has been covered:
 ## Installation
 1. Install [Node](https://nodejs.org/en/).
 2. `npm install`
-3. Rename `.env-example` to `.env`. This project relies on the following APIs:
+3. Rename `.env-example` to `.env` and add your API credentials. This project relies on the following APIs:
    - [Geonames](http://www.geonames.org) to get coordinates
    - [Weatherbit](https://www.weatherbit.io/) to get weather data by coordinates
    - [Pixabay](https://pixabay.com) to get an image
