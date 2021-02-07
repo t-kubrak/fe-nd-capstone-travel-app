@@ -30,3 +30,6 @@ Note: this app runs on localhost:8081, but you can change this in `/server/index
 ### To use this app for development purposes:
 1. `npm run build-dev` to start webpack dev server which runs on localhost:8080
 2. Open another terminal and enter `npm start`, so that we can use our express server endpoints.
+
+### Testing
+Use `npm test` command to run the tests
