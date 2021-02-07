@@ -29,13 +29,23 @@ app.post('/trip', async function (req, res) {
     const geoNamesEndpoint = `http://api.geonames.org/searchJSON?q=${req.body.city}&maxRows=1&username=${process.env.GEONAMES_API_USERNAME}`;
 
     try {
-        const apiRes = await fetch(encodeURI(geoNamesEndpoint), {
-            method: 'POST',
+        const geoNamesRes = await fetch(encodeURI(geoNamesEndpoint), {
+            method: 'GET',
         });
-        const jsonRes = await apiRes.json();
-        console.log(jsonRes.geonames[0].lng);
-        console.log(jsonRes.geonames[0].lat);
-        res.send(jsonRes);
+        let jsonRes = await geoNamesRes.json();
+        const lng = jsonRes.geonames[0].lng;
+        const lat = jsonRes.geonames[0].lat;
+
+        const weatherbitEndpoint = `http://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_API_KEY}`;
+
+        const weatherbitRes = await fetch(encodeURI(weatherbitEndpoint), {
+            method: 'GET',
+        });
+        jsonRes = await weatherbitRes.json();
+        const description = jsonRes.data[0].weather.description;
+        const temp = jsonRes.data[0].temp;
+
+        res.send(weatherbitRes);
     } catch (error) {
         console.log("error", error);
     }
