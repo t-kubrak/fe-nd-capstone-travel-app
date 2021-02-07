@@ -25,5 +25,23 @@ app.listen(8081, function () {
     console.log('Example app listening on port 8081!')
 })
 
+app.post('/trip', async function (req, res) {
+    const geoNamesEndpoint = `http://api.geonames.org/searchJSON?q=${req.body.city}&maxRows=1&username=${process.env.GEONAMES_API_USERNAME}`;
+
+    try {
+        const apiRes = await fetch(encodeURI(geoNamesEndpoint), {
+            method: 'POST',
+        });
+        const jsonRes = await apiRes.json();
+        console.log(jsonRes.geonames[0].lng);
+        console.log(jsonRes.geonames[0].lat);
+        res.send(jsonRes);
+    } catch (error) {
+        console.log("error", error);
+    }
+
+    res.send();
+})
+
 
 
