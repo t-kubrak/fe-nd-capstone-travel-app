@@ -1,21 +1,31 @@
 function addTrip(json) {
+    const deleteTrip = document.createElement('input');
+    deleteTrip.setAttribute('type', 'button');
+    deleteTrip.setAttribute('value', "❌");
+    deleteTrip.classList.add("delete-trip");
+
     const city = document.createElement('p');
     city.innerText = json.city;
     city.classList.add('city');
+
     const date = document.createElement('p');
     date.innerText = json.date;
     date.classList.add('date');
+
     const weatherDesc = document.createElement('p');
     weatherDesc.innerText = json.weatherDesc;
     weatherDesc.classList.add('weatherDesc');
+
     const temperature = document.createElement('p');
     temperature.innerText = `${json.temperature}°C`;
     temperature.classList.add('temperature');
+
     const image = document.createElement('img');
     image.setAttribute('src', json.imageUrl);
 
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('card');
+    cardDiv.appendChild(deleteTrip);
     cardDiv.appendChild(city);
     cardDiv.appendChild(date);
     cardDiv.appendChild(weatherDesc);

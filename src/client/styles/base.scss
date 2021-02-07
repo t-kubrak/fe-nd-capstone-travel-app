@@ -24,7 +24,7 @@
   margin: 15px 0;
 }
 
-.add-trip {
+#add-trip {
   @extend %card;
 
   .form__input {
@@ -46,6 +46,10 @@
   .card {
     @extend %card;
   }
+}
+
+.delete-trip {
+  float: right;
 }
 
 @media (min-width: 1024px) {
