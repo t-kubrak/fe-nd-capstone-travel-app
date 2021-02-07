@@ -26,7 +26,9 @@ app.listen(8081, function () {
 })
 
 app.post('/trip', async function (req, res) {
-    const geoNamesEndpoint = `http://api.geonames.org/searchJSON?q=${req.body.city}&maxRows=1&username=${process.env.GEONAMES_API_USERNAME}`;
+    const city = req.body.city;
+    const date = req.body.date;
+    const geoNamesEndpoint = `http://api.geonames.org/searchJSON?username=${process.env.GEONAMES_API_USERNAME}&q=${city}&maxRows=1`;
 
     try {
         const geoNamesRes = await fetch(encodeURI(geoNamesEndpoint), {
@@ -36,28 +38,28 @@ app.post('/trip', async function (req, res) {
         const lng = jsonRes.geonames[0].lng;
         const lat = jsonRes.geonames[0].lat;
 
-        const weatherbitEndpoint = `http://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_API_KEY}`;
+        const weatherbitEndpoint = `http://api.weatherbit.io/v2.0/current?&key=${process.env.WEATHERBIT_API_KEY}&lat=${lat}&lon=${lng}`;
 
         const weatherbitRes = await fetch(encodeURI(weatherbitEndpoint), {
             method: 'GET',
         });
         jsonRes = await weatherbitRes.json();
-        const description = jsonRes.data[0].weather.description;
-        const temp = jsonRes.data[0].temp;
+        const weatherDesc = jsonRes.data[0].weather.description;
+        const temperature = jsonRes.data[0].temp;
 
-        const pixabayEndpoint = `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}=${req.body.city}&category=places`
+        const pixabayEndpoint = `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${city}&category=places`
         const pixabayRes = await fetch(encodeURI(pixabayEndpoint), {
             method: 'GET',
         });
         jsonRes = await pixabayRes.json();
         const imageUrl = jsonRes.hits[0].webformatURL;
-        console.log(imageUrl);
-        res.send(jsonRes);
+
+        res.send({city, date, weatherDesc, temperature, imageUrl});
     } catch (error) {
         console.log("error", error);
+        res.status(500)
+        res.send();
     }
-
-    res.send();
 })
 
 
